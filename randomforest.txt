@@ -1,8 +1,9 @@
 import pandas  as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
-df = pd.read_csv('pima.csv')
+df = pd.read_csv('random.csv')
 df.head()
 
 x = df.iloc[: , : -1]
@@ -13,6 +14,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from sklearn import tree
+
 
 x_train , x_test ,y_train,y_test = train_test_split(x,y)
 
@@ -33,3 +36,9 @@ rf_accuracy = accuracy_score(y_test, rf_predictions)
 # Print the results
 print("Decision Tree Accuracy:", dt_accuracy)
 print("Random Forest Accuracy:", rf_accuracy)
+
+# Visualize one of the decision trees in the Random Forest
+plt.figure(figsize=(20, 15))
+tree.plot_tree(rf.estimators_[0], feature_names=x.columns, class_names=np.unique(y).astype('str'), filled=True)
+plt.show()
+
