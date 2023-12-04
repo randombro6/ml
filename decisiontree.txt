@@ -1,0 +1,32 @@
+# Import necessary libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import classification_report, accuracy_score, precision_score, confusion_matrix
+
+# Read the dataset from a CSV file ('zoo_data.csv') using pandas
+data = pd.read_csv('zoo_data.csv')
+
+# Extract features (X) and labels (Y) from the dataset
+X = data.iloc[:, :-1]  # Features (all columns except the last one)
+Y = data.iloc[:, -1]   # Labels (the last column)
+
+# Split the data into training and testing sets (80% training, 20% testing)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
+
+# Create a Decision Tree classifier
+clf = DecisionTreeClassifier()
+
+# Train (fit) the classifier on the training data
+clf.fit(X_train, Y_train)
+
+# Predict labels for the test set
+Y_pred = clf.predict(X_test)
+
+# Evaluate the performance of the classifier
+# Print the confusion matrix
+print("Confusion Matrix:", confusion_matrix(Y_test, Y_pred))
+
+# Print a classification report, including precision, recall, and F1-score
+print("Classification Report:")
+print(classification_report(Y_test, Y_pred))

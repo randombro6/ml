@@ -1,0 +1,110 @@
+#without using inbuit function
+import statistics as np
+import math
+import numpy as np1
+from sklearn import preprocessing as p
+l1=np1.array([115.3, 115.3, 195.5, 120.5, 110.2, 90.4, 105.6, 110.9, 116.3, 122.3, 125.4])
+l=len(l1)
+s=sum(l1)
+
+mean=s/l
+print("mean: ",mean)
+
+mean2=np.mean(l1)
+print("mean: ",mean2)
+print("\n")
+#median
+l1.sort()
+if l%2==0:
+    med1=l1[l//2]
+    med2=l1[l//2 - 1]
+    med=(med1+med2)/2
+else:
+    med=l1[l//2]
+print("median: ",med)
+
+mdn=np.median(l1)
+print("median: ",mdn)
+print("\n")
+#MODE
+uniq=[]
+mod=[]
+for i in l1:
+    if i not in uniq:
+        uniq.append(i)
+    else:
+        mod.append(i)
+print(mod)
+
+modee=np.mode(l1)
+print("mode: ",modee)
+print("\n")
+#standard deviation
+std=np.stdev(l1)
+print("standard deviation: ",std)
+
+
+SUM= 0
+for i in l1 :
+    SUM +=(i-mean)**2
+
+stdeV = math.sqrt(SUM/(len(l1)-1))
+print("standard deviation: ",stdeV)
+print("\n")
+#variance
+var=stdeV**2
+print("Variance",var)
+print("\n")
+#min-max normalization
+std1=p.MinMaxScaler()
+normalizedData = std1.fit_transform(l1.reshape(-1,1))
+print('std',normalizedData)
+print('\n')
+
+min_max_norm = (l1 - np1.min(l1)) / ( np1.max(l1) - np1.min(l1))
+print("Min-Max Normalization:", min_max_norm)
+
+#without built-in
+min_value = min(l1)
+max_value = max(l1)
+min_max_norm = [(value - min_value) / (max_value - min_value) for value in l1]
+print("Min-Max Normalization:", min_max_norm)
+print("\n")
+#standardization
+mean = sum(l1) / len(l1)
+variance = sum((value - mean) ** 2 for value in l1) / len(l1)
+standardization = [(value - mean) / variance ** 0.5 for value in l1]
+print("Standardization:", standardization)
+print("Using Inbuilt function of standardization ")
+standardization = (l1 - np1.mean(l1)) / np1.std(l1)
+print("Standardization:", standardization)
+
+#using inbuilt functions
+import numpy as np
+from collections import Counter
+import statistics as st
+
+data = np.array([115.3, 195.5, 120.5, 110.2, 90.4, 105.6, 110.9, 116.3, 122.3, 125.4])
+
+mean = np.mean(data)
+print("Mean:", mean)
+
+median = st.median(data)
+print("Median:", median)
+
+mode = st.mode(data)
+print("mode ",mode)
+
+std_dev = np.std(data)
+print("Standard Deviation:", std_dev)
+
+
+variance = np.var(data)
+print("Variance:", variance)
+
+normalized_data = (data - np.min(data)) / (np.max(data) - np.min(data))
+print("Min-Max Normalization:", normalized_data)
+
+
+standardized_data = (data - np.mean(data))/np.std(data)
+print("Standardization:", standardized_data)
