@@ -1,8 +1,9 @@
 # Import necessary libraries
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier,plot_tree
 from sklearn.metrics import classification_report, accuracy_score, precision_score, confusion_matrix
+import matplotlib.pyplot as plt
 
 # Read the dataset from a CSV file ('zoo_data.csv') using pandas
 data = pd.read_csv('zoo_data.csv')
@@ -30,3 +31,11 @@ print("Confusion Matrix:", confusion_matrix(Y_test, Y_pred))
 # Print a classification report, including precision, recall, and F1-score
 print("Classification Report:")
 print(classification_report(Y_test, Y_pred))
+
+# Visualize the Decision Tree
+plt.figure(figsize=(15, 10))
+# Convert class names to strings
+class_names_str = [str(class_name) for class_name in clf.classes_]
+plot_tree(clf, filled=True, feature_names=X.columns, class_names=class_names_str, rounded=True)
+plt.title("Decision Tree Visualization")
+plt.show()
